@@ -25,12 +25,15 @@ public class BusinessCoach {
 
         boolean isVisitorPassesThrough = isAdult && !isVisitorInBlackList && isVisitorInvitedOrSolvent;
 
-        // Обязательный взнос округляется до 2 знаков после запятой
-        double entranceFee = Double.parseDouble(String.format("%.2f", money * feeMultiplier).replace(',', '.'));
-
         System.out.println("Возраст посетителя: " + visitorAge);
         System.out.println("Количество денег: " + money);
         System.out.println("Посетитель проходит: " + isVisitorPassesThrough);
-        System.out.println("Обязательный добровольный взнос: " + entranceFee);
+
+        double entranceFee = 0;
+        if (isVisitorPassesThrough) {
+            // Обязательный взнос округляется до 2 знаков после запятой
+            entranceFee = Double.parseDouble(String.format("%.2f", money * feeMultiplier).replace(',', '.'));
+            System.out.println("Обязательный добровольный взнос: " + entranceFee);
+        }
     }
 }
