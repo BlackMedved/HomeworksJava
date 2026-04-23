@@ -46,11 +46,11 @@ class Baskets {
                 Stream.of(productBasketPetya, productBasketKolya, productBasketTerenty).flatMap(Stream::of).toList());
 
         // Создал компаратор, который будет сравнивать длины строк.
-        Comparator<String> stringLengthComparator = Comparator.comparing(String::length);
+        Comparator<String> stringByLengthComparator = Comparator.comparing(String::length);
 
         // Тоже отдельные методы, в которые передаю мой список уникальных продуктов и компаратор, сравнивающий длины.
-        String longestProductName = GetLongestProductName(productNames, stringLengthComparator);
-        String shortestProductName = GetShortestProductName(productNames, stringLengthComparator);
+        String longestProductName = GetLongestProductName(productNames, stringByLengthComparator);
+        String shortestProductName = GetShortestProductName(productNames, stringByLengthComparator);
         double averageLengthOfProductName = GetAverageProductsName(productNames);
 
         System.out.printf("""
@@ -83,13 +83,13 @@ class Baskets {
     }
 
     // Получаю максимальную длину названия продукта передавая компаратор в функцию max
-    static String GetLongestProductName(HashSet<String> productBasket, Comparator<String> stringLengthComparator) {
-        return productBasket.stream().max(stringLengthComparator).orElse("");
+    static String GetLongestProductName(HashSet<String> productBasket, Comparator<String> stringByLengthComparator) {
+        return productBasket.stream().max(stringByLengthComparator).orElse("");
     }
 
     // Получаю максимальную длину названия продукта передавая компаратор в функцию min
-    static String GetShortestProductName(HashSet<String> productBasket, Comparator<String> stringLengthComparator) {
-        return productBasket.stream().min(stringLengthComparator).orElse("");
+    static String GetShortestProductName(HashSet<String> productBasket, Comparator<String> stringByLengthComparator) {
+        return productBasket.stream().min(stringByLengthComparator).orElse("");
     }
 
     // Преобразую коллекцию строк в инты, где элеметами становятся длины названий продуктов
