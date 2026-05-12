@@ -45,6 +45,6 @@ public class Methods {
     public static String generateAgentId(String prefix, int seed) {
         Random random = new Random(seed);
         int randomPositiveInt = Math.abs(random.nextInt(1000, 10000));
-        return "{" + prefix.toUpperCase() + "}-" + randomPositiveInt;
+        return "{" + prefix.toUpperCase() + "}-" + "{" + randomPositiveInt + "}";
     }
 }
