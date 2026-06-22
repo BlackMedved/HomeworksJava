@@ -21,7 +21,7 @@ public class TaskTracker {
         taskList.forEach(Task::printTaskInfo);
     }
 
-    public void taskIsDone(String taskName) {
+    public void setTaskIsDone(String taskName) {
         Task foundTask = getTaskFromListByTaskNameOrDefault(taskName);
         int index = taskList.indexOf(foundTask);
         if (foundTask.getTaskName() != null) {
