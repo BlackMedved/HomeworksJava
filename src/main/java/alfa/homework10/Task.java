@@ -31,7 +31,7 @@ public class Task {
         isDone = done;
     }
 
-    public void getTaskInfo() {
-        System.out.printf("[%s] %s", isDone ? "x" : " ", taskName);
+    public void printTaskInfo() {
+        System.out.printf("[%s] %s\n", isDone ? "x" : " ", taskName);
     }
 }
