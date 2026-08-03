@@ -39,7 +39,7 @@ public class BoardGameTest {
             "Манчкин, 14, 0",
             "Ведьмак, 16, -100" },
             nullValues = {"null"})
-    public void errorWhileAddingIncorrectPropertiesInConstructor(String name, int minimalPlayerAge, double dayRentCost) {
+    public void throwsExceptionWhenAddingIncorrectPropertiesInConstructor(String name, int minimalPlayerAge, double dayRentCost) {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new BoardGame(name, minimalPlayerAge, dayRentCost),
@@ -52,7 +52,7 @@ public class BoardGameTest {
             "null, -5, -200",
             ", -1, 0" },
             nullValues = {"null"})
-    public void errorWhileAddingIncorrectPropertiesInSetters(String name, int minimalPlayerAge, double dayRentCost) {
+    public void throwsExceptionWhenAddingIncorrectPropertiesInSetters(String name, int minimalPlayerAge, double dayRentCost) {
         BoardGame boardGame = new BoardGame();
         assertAll("Проверка отрабатывания исключений при изменении значений через сеттеры",
                 () -> assertThrows(
