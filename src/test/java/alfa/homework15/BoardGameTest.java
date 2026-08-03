@@ -2,6 +2,7 @@ package alfa.homework15;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -9,7 +10,7 @@ public class BoardGameTest {
     @Test
     public void boardGameClassIsCorrect() {
         BoardGame boardGame = new BoardGame();
-        String boardGameClass = String.valueOf(boardGame.getClass());
+        String boardGameClass = boardGame.getClass().getSimpleName();
         assertEquals("BoardGame", boardGameClass, "Создан экземпляр с некорректным классом");
     }
 
@@ -17,14 +18,31 @@ public class BoardGameTest {
     public void boardGamePropertiesCorrectlyAddedInConstructor() {
         String name = "Подземелья и драконы";
         int minimalPlayerAge = 14;
-        double rentCost = 300;
-        BoardGame boardGame = new BoardGame(name, minimalPlayerAge, rentCost);
-        String[] result = boardGame.toString().split("[,{}:]");
+        double dayRentCost = 300;
+        BoardGame boardGame = new BoardGame(name, minimalPlayerAge, dayRentCost);
         assertAll("Проверка добавления параметров через конструктор",
-                () -> assertEquals(name, result[2], "Некорректное название игры"),
-                () -> assertEquals(minimalPlayerAge, result[5], "Некорректный возраст"),
-                () -> assertEquals(rentCost, result[7], "Некорректное название игры"),
-                () -> assertEquals(false, result[9], "Некорректное значение брони")
+                () -> assertEquals(name, boardGame.getName(), "Некорректное название игры"),
+                () -> assertEquals(minimalPlayerAge, boardGame.getMinimalPlayerAge(), "Некорректный возраст"),
+                () -> assertEquals(dayRentCost, boardGame.getDayRentCost(), "Некорректное название игры"),
+                () -> assertEquals(false, boardGame.getIsRented(), "Некорректное значение брони")
                 );
     }
+
+    @ParameterizedTest
+    @CsvSource({
+            "null, 3, 200",
+            ", 5, 300",
+            "Уно, -2, 500",
+            "Манчкин, 14, 0",
+            "Ведьмак, 16, -100"
+    })
+    public void errorWhileAddingIncorrectPropertiesInConstructor(String name, int minimalPlayerAge, double dayRentCost) {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> { new BoardGame(name, minimalPlayerAge, dayRentCost); },
+                "Не отрабатывает исключение при вводе некорректных данных в конструктор"
+        );
+    }
+
+
 }
