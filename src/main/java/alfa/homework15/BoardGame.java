@@ -37,6 +37,7 @@ public class BoardGame {
     }
 
     public void setName(String name) {
+        if (name == null || name.isEmpty()) throw new IllegalArgumentException();
         this.name = name;
     }
 
@@ -45,6 +46,7 @@ public class BoardGame {
     }
 
     public void setMinimalPlayerAge(int minimalPlayerAge) {
+        if (minimalPlayerAge < 0) throw new IllegalArgumentException();
         this.minimalPlayerAge = minimalPlayerAge;
     }
 
@@ -53,6 +55,7 @@ public class BoardGame {
     }
 
     public void setDayRentCost(double dayRentCost) {
+        if (dayRentCost <= 0) throw new IllegalArgumentException();
         this.dayRentCost = dayRentCost;
     }
 
@@ -62,5 +65,9 @@ public class BoardGame {
 
     public void setRented(boolean rented) {
         isRented = rented;
+    }
+
+    public boolean canBeRentedBy(int age) {
+        return age >= minimalPlayerAge;
     }
 }

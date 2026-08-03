@@ -42,8 +42,34 @@ public class BoardGameTest {
     public void errorWhileAddingIncorrectPropertiesInConstructor(String name, int minimalPlayerAge, double dayRentCost) {
         assertThrows(
                 IllegalArgumentException.class,
-                () -> { new BoardGame(name, minimalPlayerAge, dayRentCost); },
+                () -> new BoardGame(name, minimalPlayerAge, dayRentCost),
                 "Не отрабатывает исключение при вводе некорректных данных в конструктор"
+        );
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {
+            "null, -5, -200",
+            ", -1, 0" },
+            nullValues = {"null"})
+    public void errorWhileAddingIncorrectPropertiesInSetters(String name, int minimalPlayerAge, double dayRentCost) {
+        BoardGame boardGame = new BoardGame();
+        assertAll("Проверка отрабатывания исключений при изменении значений через сеттеры",
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> boardGame.setName(name),
+                        "Не отрабатывает исключение при изменении названия через сеттер"
+                ),
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> boardGame.setMinimalPlayerAge(minimalPlayerAge),
+                        "Не отрабатывает исключение при изменении возраста через сеттер"
+                ),
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> boardGame.setDayRentCost(dayRentCost),
+                        "Не отрабатывает исключение при изменении стоимости через сеттер"
+                )
         );
     }
 
