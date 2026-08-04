@@ -20,7 +20,7 @@ public class GameCatalogTest {
     }
 
     @Test
-    public void correctGettingBoardGameFromGameRental() {
+    public void correctGettingBoardGameFromGameRentalWhenBoardGameExists() {
         GameRental gameRental = new GameRental();
         BoardGame boardGame = new BoardGame();
         gameRental.addBoardGame(boardGame);
@@ -28,15 +28,31 @@ public class GameCatalogTest {
     }
 
     @Test
-    public void throwsExceptionWhenTryingToAddDuplicate() {
+    public void correctGettingNullFromGameRentalWhenBoardGameDoesNotExists() {
+        GameRental gameRental = new GameRental();
+        BoardGame boardGame = new BoardGame();
+        gameRental.addBoardGame(boardGame);
+        assertNull(gameRental.getBoardGame("пустое"), "Некорректный поиск элемента");
+    }
+
+    @Test
+    public void throwsExceptionWhenTryingToAddDuplicateOrNull() {
         GameRental gameRental = new GameRental();
         BoardGame boardGame1 = new BoardGame();
         gameRental.addBoardGame(boardGame1);
         BoardGame boardGame2 = new BoardGame();
-        assertThrows(
-                IllegalArgumentException.class,
-                () -> gameRental.addBoardGame(boardGame2),
-                "Не отрабатывает исключение при добавлении дубля"
+        assertAll("Проверка на возникающее исключение при добавлении дубликата или пустого значения",
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> gameRental.addBoardGame(boardGame2),
+                        "Не отрабатывает исключение при добавлении дубля"
+                ),
+                () -> assertThrows(
+                        IllegalArgumentException.class,
+                        () -> gameRental.addBoardGame(null),
+                        "Не отрабатывает исключение при добавлении пустого значения"
+                )
         );
+
     }
 }
