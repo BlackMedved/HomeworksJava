@@ -1,4 +1,4 @@
-package alfa.homework17;
+package alfa.homework17.com.lesson.homework;
 
 import alfa.homework17.com.lesson.homework.models.Usuario;
 import io.restassured.RestAssured;
