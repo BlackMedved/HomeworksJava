@@ -85,7 +85,7 @@ public class ServeRestTest {
                           "nome": "Обновлённый Покупатель",
                           "email": "%s",
                           "password": "secret123",
-                          "administrador": "true"
+                          "administrador": "false"
                         }
                         """, EMAIL))
                 .when()
@@ -154,7 +154,8 @@ public class ServeRestTest {
     @Test
     @DisplayName("★ Создание пользователя через DTO (сериализация)")
     public void shouldCreateUserFromDto() {
-        Usuario usuario = new Usuario("Тайный Покупатель", EMAIL, "secret123", "true");
+        String dtoEmail = "dto_" + System.currentTimeMillis() + "@qa.com";
+        Usuario usuario = new Usuario("Тайный Покупатель", dtoEmail, "secret123", "true");
         given()
                 .contentType(ContentType.JSON)
                 .body(usuario)
