@@ -40,3 +40,4 @@ build/
 
 /src/main/java/alfa/homework*/review/
 /src/test/java/alfa/homework*/review/
+.kilocode/mcp.json
