@@ -21,8 +21,8 @@ public class LoginPage {
 
     private final String INVALID_CREDENTIALS_FLASH_MESSAGE = "Your username is invalid!";
 
-    public void assertTitle() {
-        loginPageTitle.shouldHave(text("Login Page"));
+    public void assertTitle(String title) {
+        loginPageTitle.shouldHave(text(title));
     }
 
     public void assertElementalSeleniumLink() {

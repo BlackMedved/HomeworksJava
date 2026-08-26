@@ -22,14 +22,14 @@ public class HerokuAppTest {
         HomePage home = new HomePage();
 
         LoginPage loginPage = home.openFormAuthentication();
-        loginPage.assertTitle();
+        loginPage.assertTitle("Login Page");
 
         SecureAreaPage secureArea = loginPage.login("tomsmith", "SuperSecretPassword!");
         secureArea.assertSuccessMessage();
         secureArea.assertLogoutButton();
 
         LoginPage backToLogin = secureArea.logout();
-        backToLogin.assertTitle();
+        backToLogin.assertTitle("Login Page");
     }
 
     @Test
@@ -37,7 +37,7 @@ public class HerokuAppTest {
         HomePage home = new HomePage();
 
         LoginPage loginPage = home.openFormAuthentication();
-        loginPage.assertTitle();
+        loginPage.assertTitle("Login Page");
         loginPage.assertElementalSeleniumLink();
 
         loginPage.login("admin", "1234");

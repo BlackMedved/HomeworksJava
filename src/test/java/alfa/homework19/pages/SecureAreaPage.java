@@ -15,10 +15,10 @@ public class SecureAreaPage {
     private final SelenideElement flashingMessage = $("#flash");
     private final SelenideElement logoutButton = $("a[href='/logout']");
 
-    private final String SUCCESSFULL_LOGGING_FLUSH_MESSAGE = "You logged into a secure area!";
+    private final String SUCCESSFUL_LOGIN_FLASH_MESSAGE = "You logged into a secure area!";
     
     public void assertSuccessMessage() {
-        flashingMessage.shouldHave(text(SUCCESSFULL_LOGGING_FLUSH_MESSAGE));
+        flashingMessage.shouldHave(text(SUCCESSFUL_LOGIN_FLASH_MESSAGE));
     }
 
     public void assertLogoutButton() {
