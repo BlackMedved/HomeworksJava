@@ -166,4 +166,71 @@ public class ServeRestTest {
                 .body("message", equalTo("Cadastro realizado com sucesso"))
                 .body("_id", notNullValue());
     }
+
+    @Test
+    @DisplayName("Негативный: повторная регистрация с тем же email")
+    public void shouldNotCreateDuplicateUser() {
+        String dupEmail = "dup_" + System.currentTimeMillis() + "@qa.com";
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(String.format("""
+                        {
+                          "nome": "Основной",
+                          "email": "%s",
+                          "password": "secret123",
+                          "administrador": "false"
+                        }
+                        """, dupEmail))
+                .when()
+                .post("/usuarios")
+                .then()
+                .statusCode(201);
+
+        given()
+                .contentType(ContentType.JSON)
+                .body(String.format("""
+                        {
+                          "nome": "Дубликат",
+                          "email": "%s",
+                          "password": "secret123",
+                          "administrador": "false"
+                        }
+                        """, dupEmail))
+                .when()
+                .post("/usuarios")
+                .then()
+                .statusCode(400)
+                .body("message", equalTo("Este email já está sendo usado"));
+    }
+
+    @Test
+    @DisplayName("Негативный: логин с неверным паролем")
+    public void shouldNotLoginWithWrongPassword() {
+        given()
+                .contentType(ContentType.JSON)
+                .body(String.format("""
+                        {
+                          "email": "%s",
+                          "password": "wrong-password"
+                        }
+                        """, EMAIL))
+                .when()
+                .post("/login")
+                .then()
+                .statusCode(401)
+                .body("message", equalTo("Email e/ou senha inválidos"));
+    }
+
+    @Test
+    @DisplayName("Фильтрация товаров по имени")
+    public void shouldFilterProductsByName() {
+        given()
+                .queryParam("nome", "Logitech")
+                .when()
+                .get("/produtos")
+                .then()
+                .statusCode(200)
+                .body("produtos.nome", everyItem(containsString("Logitech")));
+    }
 }
