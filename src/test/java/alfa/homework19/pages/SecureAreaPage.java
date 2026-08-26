@@ -1,6 +1,5 @@
 package alfa.homework19.pages;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -18,9 +17,8 @@ public class SecureAreaPage {
 
     private final String SUCCESSFULL_LOGGING_FLUSH_MESSAGE = "You logged into a secure area!";
     
-    public SecureAreaPage assertSuccessMessage() {
+    public void assertSuccessMessage() {
         flashingMessage.shouldHave(text(SUCCESSFULL_LOGGING_FLUSH_MESSAGE));
-        return this;
     }
 
     public void assertLogoutButton() {

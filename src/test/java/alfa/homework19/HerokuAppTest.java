@@ -3,7 +3,6 @@ package alfa.homework19;
 import alfa.homework19.pages.HomePage;
 import alfa.homework19.pages.LoginPage;
 import alfa.homework19.pages.SecureAreaPage;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
